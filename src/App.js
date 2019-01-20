@@ -1,26 +1,69 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Card, Cards } from './components/StyledComponents';
 
 class App extends Component {
+
+
+  state = {
+    word: "Taco Bell", 
+    correctLetters: [],
+    guessedLetters: [],
+    guessCount: 0
+  }
+
+
+  updateGuessCount = () => {
+    this.setState(state => ({
+      guessCount: state.guessCount++
+    }))
+  }
+
+  updateGuessedLetters = (letter) => {
+    this.setState(state => ({
+      guessedLetters: [...state.guessedLetters, letter]
+    }))
+  }
+
+  updateCorrectLetters = (index) => {
+    this.setState(state => ({
+      correctLetters: [...state.correctLetters, index]
+    }))
+  }
+
+  guess = (guess) => {
+    const { word } = this.state
+    this.udateGuessedLetters(guess)
+    this.updateGuessCount()
+    for (var i = 0; i < word.length; i++) {
+        if (word[i] === guess) {
+          this.updateCorrectLetters(guess)
+        } else {
+
+        }
+     }
+  }
+
+
+
+
+
   render() {
+    const { word, correctLetters } = this.state
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
+      <>
+      <h1>Hangman</h1>
+      <p>Guesses: {this.state.guessedLetters}</p>
+      <Cards>
+        {word.split("").map( (single, index) => 
+          <Card
+            key={index}
+            correct={index===correctLetters}
           >
-            Learn React
-          </a>
-        </header>
-      </div>
+          {single}</Card>
+          )}
+      </Cards>      </>
     );
   }
 }

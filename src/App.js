@@ -9,13 +9,13 @@ class App extends Component {
     word: "Taco Bell", 
     correctLetters: [1,3],
     guessedLetters: ["a", "o"],
-    guessCount: 0
+    guessCount: 0,
+    currentGuess: ""
   }
-
 
   updateGuessCount = () => {
     this.setState(state => ({
-      guessCount: state.guessCount++
+      guessCount: state.guessCount + 1
     }))
   }
 
@@ -33,11 +33,11 @@ class App extends Component {
 
   guess = (guess) => {
     const { word } = this.state
-    this.udateGuessedLetters(guess)
+    this.updateGuessedLetters(guess)
     this.updateGuessCount()
     for (var i = 0; i < word.length; i++) {
         if (word[i] === guess) {
-          this.updateCorrectLetters(guess)
+          this.updateCorrectLetters(i)
         } else {
 
         }
@@ -45,7 +45,9 @@ class App extends Component {
   }
 
 
-
+  handleGuess = (e) => {
+    this.guess(e.target.value)
+  }
 
 
   render() {
@@ -54,7 +56,14 @@ class App extends Component {
     return (
       <>
       <h1>Hangman</h1>
-      <p>Guesses: {this.state.guessedLetters}</p>
+      <p>Count: {this.state.guessCount}</p>
+      <p>Guesses: {this.state.guessedLetters.map( single => single)}</p>
+      <input 
+              id="bestInputEver"
+              autoFocus
+              value={""}
+              onChange={this.handleGuess}
+            />
       <Cards>
         {word.split("").map( (single, index) => 
           <Card

@@ -7,8 +7,8 @@ class App extends Component {
 
   state = {
     word: "Taco Bell", 
-    correctLetters: [],
-    guessedLetters: [],
+    correctLetters: [1,3],
+    guessedLetters: ["a", "o"],
     guessCount: 0
   }
 
@@ -61,7 +61,8 @@ class App extends Component {
             key={index}
             correct={index===correctLetters}
           >
-          {single}</Card>
+          <p>{(correctLetters.includes(index)) ? single : "?"}</p>
+          </Card>
           )}
       </Cards>      </>
     );

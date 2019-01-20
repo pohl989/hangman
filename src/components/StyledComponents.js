@@ -11,10 +11,10 @@ export const colors = {
   white: "#fff",
 }
 
-const borderRadius = ".8em;"
+const borderRadius = ".2em;"
 
 export const Cards = styled.div`
-  justify-content: space-evenly;
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
@@ -24,8 +24,14 @@ export const Cards = styled.div`
 export const Card = styled.div`
   border: 1px solid ${colors.neonGreen};
   border-radius: ${borderRadius};
-  margin: 20px 10px;
+  margin: 2px 2px;
   transition: 0.6s;
+  width: 40px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 `
 
 export const LetterCard = styled(Card)`
